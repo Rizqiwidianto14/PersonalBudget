@@ -17,16 +17,21 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var promoView: UIView!
     @IBOutlet weak var barChartView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     var pieChart = PieChartView()
     var barChart = BarChartView()
+    
+    var dummyData = ["Shopee Cards"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpPieCharts()
         setUpPromoView()
         setUpBarCharts()
-        // Do any additional setup after loading the view.
+        tableView.layer.cornerRadius = 10
+        tableView.layer.borderWidth = 3
+        tableView.layer.borderColor = UIColor(string: "#F2F3F4").cgColor
     }
     
     
@@ -51,15 +56,11 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
         pieChart.centerText = "June 2021"
         self.backgroundView.addSubview(pieChartView)
         var entries = [ChartDataEntry]()
-        
         for x in 0..<10{
             entries.append(ChartDataEntry(x: Double(x), y: Double(x)))
         }
-        
         pieChart.legend.enabled = false
         pieChart.drawEntryLabelsEnabled = false
-        
-        
         let set = PieChartDataSet(entries: entries)
         set.drawValuesEnabled = false
         set.colors = ChartColorTemplates.colorful()
@@ -71,8 +72,6 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
     
     func setUpBarCharts(){
         barChart.frame = CGRect(x: 0, y: 0, width: self.barChartView.frame.width/2, height: self.barChartView.frame.height-50)
-        
-        
         barChartView.layer.cornerRadius = 10
         barChartView.layer.borderWidth = 3
         barChartView.layer.borderColor = UIColor(string: "#F2F3F4").cgColor
@@ -83,28 +82,21 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
         for x in 0..<10{
             entries.append((BarChartDataEntry(x: Double(x), y: Double(x))))
         }
-        
-        
+
         let set = BarChartDataSet(entries: entries)
         set.colors = ChartColorTemplates.colorful()
         barChart.doubleTapToZoomEnabled = false
-        
         let data = BarChartData(dataSet: set)
         barChart.data = data
-
         self.backgroundView.addSubview(barChartView)
-
-        
     }
     
     func setUpPromoView(){
         promoView.layer.cornerRadius = 10
         promoView.layer.borderColor = UIColor(string: "#F2F3F4").cgColor
         promoView.layer.borderWidth = 3
-        
         barChart.translatesAutoresizingMaskIntoConstraints = false
         self.barChartView.addSubview(barChart)
-        
         NSLayoutConstraint.activate([
             barChart.topAnchor.constraint(equalTo: balanceLabel.bottomAnchor, constant: 20),
             barChart.leadingAnchor.constraint(equalTo: barChartView.leadingAnchor , constant: 20),
@@ -115,4 +107,24 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
     }
     
 
+}
+
+extension ExpensesViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dummyData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpensesCell", for: indexPath) as! ExpensesCell
+        cell.expenseName.text = dummyData[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let height = CGFloat(100)
+        return height
+    }
+    
+    
 }
