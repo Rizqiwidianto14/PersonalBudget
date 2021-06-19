@@ -31,6 +31,7 @@ class MainViewController: UIViewController, CarbonTabSwipeNavigationDelegate{
     }
     
     
+    
     func setUpSegmentedView(){
         carbonTabSwipeNavigation = CarbonTabSwipeNavigation(items: controllerNames, delegate: self)
         carbonTabSwipeNavigation.insert(intoRootViewController: self)
