@@ -19,6 +19,9 @@ class MainViewController: UIViewController, CarbonTabSwipeNavigationDelegate{
         setUpSegmentedView()
         setUpNavBar()
  
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
+        
     }
     
     func setUpNavBar(){
@@ -27,6 +30,7 @@ class MainViewController: UIViewController, CarbonTabSwipeNavigationDelegate{
         self.navigationItem.titleView = imageView
         
         self.navigationController?.navigationBar.barTintColor = UIColor(string: "#0E4B78")
+        navigationController?.navigationBar.tintColor = .white
 
     }
     

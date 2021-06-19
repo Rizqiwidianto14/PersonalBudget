@@ -10,7 +10,6 @@ import Charts
 
 class ExpensesViewController: UIViewController, ChartViewDelegate {
     
-
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var pieChartView: UIView!
     @IBOutlet weak var priceLabel: UILabel!
@@ -62,7 +61,7 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
             pieChart.bottomAnchor.constraint(equalTo: pieChartView.bottomAnchor, constant: -20)
         ])
 
-        pieChart.centerText = "June 2021"
+        pieChart.centerText = "Juni 2021"
         self.backgroundView.addSubview(pieChartView)
         var entries = [PieChartDataEntry]()
      
@@ -82,7 +81,9 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
     }
     
     @IBAction func transferButtonTapped(_ sender: Any) {
-        print("button tapped")
+        let vc = self.storyboard?.instantiateViewController(identifier: "TransferViewController") as! TransferViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     
