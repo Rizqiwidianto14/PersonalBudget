@@ -8,5 +8,6 @@ target 'PersonalBudget' do
   # Pods for PersonalBudget
 pod 'CarbonKit'
 pod 'Charts'
+pod 'DropDown'
 
 end
