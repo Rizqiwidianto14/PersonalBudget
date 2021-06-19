@@ -17,6 +17,7 @@
 		9F77217E267DD34A00E4ADB7 /* IncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F77217D267DD34A00E4ADB7 /* IncomeViewController.swift */; };
 		9F772182267DE1A100E4ADB7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772181267DE1A100E4ADB7 /* UIColor.swift */; };
 		9F772187267E19B700E4ADB7 /* ExpensesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772186267E19B700E4ADB7 /* ExpensesCell.swift */; };
+		9F77218B267E29FD00E4ADB7 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F77218A267E29FD00E4ADB7 /* Model.swift */; };
 		EAA9F28068DA0DD3FCF6C399 /* Pods_PersonalBudget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5804BFAB965E53F88BE3BF91 /* Pods_PersonalBudget.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		9F77217D267DD34A00E4ADB7 /* IncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
 		9F772181267DE1A100E4ADB7 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		9F772186267E19B700E4ADB7 /* ExpensesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesCell.swift; sourceTree = "<group>"; };
+		9F77218A267E29FD00E4ADB7 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D2DD556F41F1456370E7C4C8 /* Pods-PersonalBudget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonalBudget.release.xcconfig"; path = "Target Support Files/Pods-PersonalBudget/Pods-PersonalBudget.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 				9F77215E267D8DC000E4ADB7 /* AppDelegate.swift */,
 				9F772160267D8DC000E4ADB7 /* SceneDelegate.swift */,
 				9F772178267DD2EC00E4ADB7 /* Controller */,
+				9F77218D267E2A0700E4ADB7 /* Model */,
 				9F772180267DE18A00E4ADB7 /* Helper */,
 				9F772185267E19A300E4ADB7 /* View */,
 				9F772167267D8DC100E4ADB7 /* Assets.xcassets */,
@@ -125,6 +128,14 @@
 				9F772186267E19B700E4ADB7 /* ExpensesCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9F77218D267E2A0700E4ADB7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9F77218A267E29FD00E4ADB7 /* Model.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,6 +259,7 @@
 				9F77217B267DD34100E4ADB7 /* ExpensesViewController.swift in Sources */,
 				9F77215F267D8DC000E4ADB7 /* AppDelegate.swift in Sources */,
 				9F772161267D8DC000E4ADB7 /* SceneDelegate.swift in Sources */,
+				9F77218B267E29FD00E4ADB7 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,13 +22,22 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
     var pieChart = PieChartView()
     var barChart = BarChartView()
     
-    var dummyData = ["Shopee Cards"]
+    
+    var dummyStruct = [ExpenseModel]()
+    var dateData = ["1-7","8-14", "15-21", "22-31"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+  
+        
+        for x in 0..<10{
+            dummyStruct.append(ExpenseModel(expensesName: "Shopee Cards", expensesPrice: (x*10000), expensesDate: (x+5)))
+        }
+        
         setUpPieCharts()
         setUpPromoView()
         setUpBarCharts()
+        
         tableView.layer.cornerRadius = 10
         tableView.layer.borderWidth = 3
         tableView.layer.borderColor = UIColor(string: "#F2F3F4").cgColor
@@ -55,10 +64,13 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
 
         pieChart.centerText = "June 2021"
         self.backgroundView.addSubview(pieChartView)
-        var entries = [ChartDataEntry]()
-        for x in 0..<10{
-            entries.append(ChartDataEntry(x: Double(x), y: Double(x)))
+        var entries = [PieChartDataEntry]()
+     
+  
+        for element in dummyStruct{
+            entries.append(PieChartDataEntry(value: Double(element.expensesPrice), label: element.expensesName))
         }
+        
         pieChart.legend.enabled = false
         pieChart.drawEntryLabelsEnabled = false
         let set = PieChartDataSet(entries: entries)
@@ -69,6 +81,11 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
 
     }
     
+    @IBAction func transferButtonTapped(_ sender: Any) {
+        print("button tapped")
+    }
+    
+    
     
     func setUpBarCharts(){
         barChart.frame = CGRect(x: 0, y: 0, width: self.barChartView.frame.width/2, height: self.barChartView.frame.height-50)
@@ -77,17 +94,22 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
         barChartView.layer.borderColor = UIColor(string: "#F2F3F4").cgColor
         barChart.delegate = self
         
-        var entries = [BarChartDataEntry]()
         
-        for x in 0..<10{
-            entries.append((BarChartDataEntry(x: Double(x), y: Double(x))))
+        var entries = [BarChartDataEntry]()
+        for element in dummyStruct{
+            entries.append(BarChartDataEntry(x: Double(Int.random(in: 0...3)), y: Double(element.expensesPrice)))
         }
-
-        let set = BarChartDataSet(entries: entries)
-        set.colors = ChartColorTemplates.colorful()
+        
+        
+        let set = BarChartDataSet(entries: entries,label: "Date")
         barChart.doubleTapToZoomEnabled = false
         let data = BarChartData(dataSet: set)
         barChart.data = data
+        barChart.drawValueAboveBarEnabled = false
+        barChart.xAxis.labelPosition = .bottom
+        barChart.xAxis.labelCount = 4
+        barChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: dateData)
+        barChart.highlightPerTapEnabled = false
         self.backgroundView.addSubview(barChartView)
     }
     
@@ -103,20 +125,18 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
             barChart.trailingAnchor.constraint(equalTo: barChartView.trailingAnchor , constant: -20),
             barChart.bottomAnchor.constraint(equalTo: barChartView.bottomAnchor, constant: -20)
         ])
-        
     }
-    
-
 }
 
 extension ExpensesViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummyData.count
+        return dummyStruct.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExpensesCell", for: indexPath) as! ExpensesCell
-        cell.expenseName.text = dummyData[indexPath.row]
+        cell.expenseName.text = dummyStruct[indexPath.row].expensesName
+        cell.expensePrice.text = "\(dummyStruct[indexPath.row].expensesPrice)"
         
         return cell
     }
