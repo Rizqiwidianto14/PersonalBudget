@@ -614,7 +614,7 @@
                                                             <constraint firstAttribute="height" constant="30" id="kP4-aj-6w0"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tqc-47-Bnq">
                                                         <rect key="frame" x="15" y="78" width="389" height="1"/>
@@ -658,7 +658,7 @@
                                                             <constraint firstAttribute="height" constant="30" id="BDo-Ez-x6x"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Pilih Kategori Pengeluaran" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R5n-i9-oeb">
                                                         <rect key="frame" x="15" y="186" width="389" height="30"/>
@@ -695,7 +695,7 @@
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="ial-w3-Y51"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JDk-qX-5AV">
                                                         <rect key="frame" x="15" y="354" width="389" height="1"/>
@@ -815,8 +815,13 @@
                     <connections>
                         <outlet property="accountBalance" destination="Dvj-iF-eO9" id="b2O-Aa-nfL"/>
                         <outlet property="accountView" destination="8MM-3F-ieY" id="cjF-mz-qxE"/>
+                        <outlet property="categoriesField" destination="R5n-i9-oeb" id="9qZ-6M-udr"/>
+                        <outlet property="dateField" destination="IK5-oo-iOc" id="Uls-dm-ZPA"/>
+                        <outlet property="descriptionField" destination="KKu-Tz-4FC" id="haN-lV-jRb"/>
                         <outlet property="holderName" destination="aA1-Qy-iGw" id="cF4-s5-o2I"/>
                         <outlet property="nextButton" destination="kK3-oW-aCU" id="D4Q-o0-GBm"/>
+                        <outlet property="nominalField" destination="ioC-9K-DLw" id="XLb-hu-cm2"/>
+                        <outlet property="rekeningField" destination="Wv8-l7-mA2" id="7HT-E0-GEk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i9l-l6-kxo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

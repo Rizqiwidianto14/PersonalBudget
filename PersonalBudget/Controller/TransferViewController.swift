@@ -6,13 +6,23 @@
 //
 
 import UIKit
+import DropDown
 
-class TransferViewController: UIViewController {
+class TransferViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var accountView: UIView!
     @IBOutlet weak var holderName: UILabel!
     @IBOutlet weak var accountBalance: UILabel!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var rekeningField: UITextField!
+    @IBOutlet weak var nominalField: UITextField!
+    @IBOutlet weak var categoriesField: UITextField!
+    @IBOutlet weak var descriptionField: UITextField!
+    @IBOutlet weak var dateField: UITextField!
+    
+    let categoriesDropDown = DropDown()
+    
+    var categories = ["Biaya Listrik", "Biaya Wifi", "Gaya Hidup", "Makanan", "Investasi"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +30,7 @@ class TransferViewController: UIViewController {
         setUpNavBar()
         setUpAccountView()
         setUpNextButton()
+        setUpCategoriesDropDown()
         // Do any additional setup after loading the view.
     }
     
@@ -42,6 +53,28 @@ class TransferViewController: UIViewController {
     
     func setUpNextButton(){
         nextButton.backgroundColor = UIColor(string: "#0E4B78")
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == categoriesField{
+            categoriesDropDown.show()
+            categoriesDropDown.isHidden = false
+            categoriesField.endEditing(true)
+        }
+    }
+    
+    func setUpCategoriesDropDown(){
+        categoriesField.delegate = self
+        categoriesDropDown.anchorView = categoriesField
+        categoriesDropDown.topOffset = CGPoint(x: 0, y: -(categoriesDropDown.anchorView?.plainView.bounds.height)!)
+        categoriesDropDown.dataSource = categories
+        categoriesDropDown.selectionAction = { index, title in
+            
+            self.categoriesField.text = title
+            
+        }
+        
+        
     }
 
     /*

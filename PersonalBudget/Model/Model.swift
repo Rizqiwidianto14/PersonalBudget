@@ -13,3 +13,9 @@ struct ExpenseModel {
     var expensesPrice: Int
     var expensesDate: Int
 }
+
+struct IncomeModel{
+    var incomeName: String
+    var incomePrice: Int
+    var incomeDate: Int
+}
