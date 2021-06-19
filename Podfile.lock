@@ -1,0 +1,22 @@
+PODS:
+  - CarbonKit (2.3.1)
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
+
+DEPENDENCIES:
+  - CarbonKit
+  - Charts
+
+SPEC REPOS:
+  trunk:
+    - CarbonKit
+    - Charts
+
+SPEC CHECKSUMS:
+  CarbonKit: b60e24dbdb47179990d5e074efa87ab819c8de98
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+
+PODFILE CHECKSUM: d754600d543b0e5299b1e01521a84c0012d270dd
+
+COCOAPODS: 1.9.3
