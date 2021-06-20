@@ -12,6 +12,7 @@ struct ExpenseModel {
     var expensesName: String = ""
     var expensesPrice: Int = 0
     var expensesDate: Int = 0
+    var category: String = ""
 }
 
 struct IncomeModel{

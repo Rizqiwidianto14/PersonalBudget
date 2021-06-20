@@ -75,13 +75,14 @@ class IncomeViewController: UIViewController, ChartViewDelegate{
             entries.append(PieChartDataEntry(value: Double(element.incomePrice), label: element.incomeName))
         }
         
-        pieChart.legend.enabled = false
+        pieChart.legend.enabled = true
         pieChart.drawEntryLabelsEnabled = false
         let set = PieChartDataSet(entries: entries)
         set.drawValuesEnabled = false
         set.colors = ChartColorTemplates.liberty()
         let data = PieChartData(dataSet: set)
         pieChart.data = data
+
 
     }
     

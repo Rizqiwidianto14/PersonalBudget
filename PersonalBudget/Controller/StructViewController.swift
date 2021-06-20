@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Charts
+
 
 class StructViewController: UIViewController {
 
@@ -14,6 +16,7 @@ class StructViewController: UIViewController {
     var expensess = [ExpenseModel]()
     var balance = Int()
     var expenseBudget = Int()
+    var entries = [PieChartDataEntry]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +36,8 @@ class StructViewController: UIViewController {
             rootVC.expenses = expensess
             rootVC.balance = balance
             rootVC.expenseBudget = expenseBudget
+            rootVC.entries = entries
+
         }
 
         navigationController?.popToRootViewController(animated: true)

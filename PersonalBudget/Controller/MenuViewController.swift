@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Charts
+
 
 class MenuViewController: UIViewController {
     var expense = ExpenseModel()
     var expenses = [ExpenseModel]()
+    var entries = [PieChartDataEntry]()
  
     
     var balance = 10000000
@@ -27,6 +30,7 @@ class MenuViewController: UIViewController {
         vc.expenses = expenses
         vc.balance = balance
         vc.expenseBudget = expenseBudget
+        vc.entries = entries
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

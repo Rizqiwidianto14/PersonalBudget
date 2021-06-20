@@ -20,21 +20,22 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
     
     var pieChart = PieChartView()
     var barChart = BarChartView()
-
+    
     var expense = ExpenseModel()
     var balance = Int()
     var expenseBudget = Int()
     
     var expenses = [ExpenseModel]()
     var dateData = ["1-7","8-14", "15-21", "22-31"]
+    var entries = [PieChartDataEntry]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-
+        
         expenses.append(expense)
-       
+        
         
         balanceLabel.text = "IDR \(balance)"
         priceLabel.text = "IDR \(expenseBudget)"
@@ -43,13 +44,13 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
         setUpPromoView()
         setUpBarCharts()
         
- 
+        
         tableView.layer.cornerRadius = 10
         tableView.layer.borderWidth = 3
         tableView.layer.borderColor = UIColor(string: "#F2F3F4").cgColor
     }
     
-  
+    
     
     func setUpPieCharts(){
         pieChart.frame = CGRect(x: 0, y: 0, width: self.pieChartView.frame.width/2, height: self.pieChartView.frame.height-50)
@@ -61,31 +62,42 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
         pieChart.translatesAutoresizingMaskIntoConstraints = false
         pieChart.delegate = self
         self.pieChartView.addSubview(pieChart)
-
+        
         NSLayoutConstraint.activate([
             pieChart.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 20),
             pieChart.leadingAnchor.constraint(equalTo: pieChartView.leadingAnchor , constant: 20),
             pieChart.trailingAnchor.constraint(equalTo: pieChartView.trailingAnchor , constant: -20),
             pieChart.bottomAnchor.constraint(equalTo: pieChartView.bottomAnchor, constant: -20)
         ])
-
+        
         pieChart.centerText = "Juni 2021"
         self.backgroundView.addSubview(pieChartView)
-        var entries = [PieChartDataEntry]()
-     
-  
+        
+        print("entries: \(entries)")
+        if entries.count > 0{
+            entries.removeLast()
+        }
         for element in expenses{
-            entries.append(PieChartDataEntry(value: Double(element.expensesPrice), label: element.expensesName))
+            entries.append(PieChartDataEntry(value: Double(element.expensesPrice), label: "\(element.category)"))
+            
         }
         
-        pieChart.legend.enabled = false
-        pieChart.drawEntryLabelsEnabled = false
+        
         let set = PieChartDataSet(entries: entries)
+        print(set)
         set.drawValuesEnabled = false
         set.colors = ChartColorTemplates.colorful()
+        
         let data = PieChartData(dataSet: set)
+        
         pieChart.data = data
-
+        
+        pieChart.legend.enabled = true
+        pieChart.drawEntryLabelsEnabled = false
+        
+        
+        
+        
     }
     
     @IBAction func transferButtonTapped(_ sender: Any) {
@@ -93,6 +105,7 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
         vc.expensess = expenses
         vc.balance = balance
         vc.expenseBudget = expenseBudget
+        vc.entries = entries
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -171,10 +184,10 @@ extension ExpensesViewController: UITableViewDelegate, UITableViewDataSource{
             
         } else {
             cell.expensePercentage.text = "\(expenseBudget)%"
-
+            
         }
         
-   
+        
         
         return cell
     }

@@ -7,6 +7,8 @@
 
 import UIKit
 import CarbonKit
+import Charts
+
 
 class MainViewController: UIViewController, CarbonTabSwipeNavigationDelegate{
     
@@ -16,6 +18,7 @@ class MainViewController: UIViewController, CarbonTabSwipeNavigationDelegate{
     var expenses = [ExpenseModel]()
     var balance = Int()
     var expenseBudget = Int()
+    var entries = [PieChartDataEntry]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +79,8 @@ class MainViewController: UIViewController, CarbonTabSwipeNavigationDelegate{
             vc.expenses = expenses
             vc.balance = balance
             vc.expenseBudget = expenseBudget
+            print("entries: \(entries)")
+            vc.entries = entries
             return vc
         } else {
             let vc = storyboard.instantiateViewController(withIdentifier: "IncomeViewController") as! IncomeViewController

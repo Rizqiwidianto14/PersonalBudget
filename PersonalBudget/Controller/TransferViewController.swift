@@ -7,6 +7,8 @@
 
 import UIKit
 import DropDown
+import Charts
+
 
 class TransferViewController: UIViewController, UITextFieldDelegate {
 
@@ -27,6 +29,7 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
     var expensess = [ExpenseModel]()
     var balance = Int()
     var expenseBudget = Int()
+    var entries = [PieChartDataEntry]()
 
     
     override func viewDidLoad() {
@@ -104,12 +107,28 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
         expenses.expensesName = descriptionField.text ?? ""
         expenses.expensesPrice = Int(nominalField.text ?? "") ?? 0
         expenses.expensesDate = Int(dateField.text ?? "") ?? 0
+        expenses.category = categoriesField.text ?? ""
+        
+        
+//        if categoriesField.text == "Biaya Listrik"{
+//            expenses.category = 0
+//        } else if categoriesField.text == "Biaya Wifi"{
+//            expenses.category = 1
+//        } else if categoriesField.text == "Gaya Hidup"{
+//            expenses.category = 2
+//        } else if categoriesField.text == "Makanan"{
+//            expenses.category = 3
+//        } else {
+//            expenses.category = 4
+//        }
+        
         let vc = self.storyboard?.instantiateViewController(identifier: "StructViewController") as! StructViewController
         vc.expenses = expenses
         vc.expensess = expensess
         vc.balance = balance
         vc.expenseBudget = expenseBudget
         self.navigationController?.pushViewController(vc, animated: true)
+        vc.entries = entries
 
         
     }
