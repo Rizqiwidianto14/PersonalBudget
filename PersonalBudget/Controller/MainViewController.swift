@@ -25,6 +25,8 @@ class MainViewController: UIViewController, CarbonTabSwipeNavigationDelegate{
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backBarButtonItem
         
+
+        
         
     }
     
@@ -63,6 +65,11 @@ class MainViewController: UIViewController, CarbonTabSwipeNavigationDelegate{
         guard let storyboard = storyboard else {
             return UIViewController()
         }
+        if expense.expensesPrice > 0 {
+            expenseBudget += expense.expensesPrice
+            balance -= expenseBudget
+        }
+        
         if index == 0 {
             let vc = storyboard.instantiateViewController(withIdentifier: "ExpensesViewController") as! ExpensesViewController
             vc.expense = expense
@@ -72,6 +79,8 @@ class MainViewController: UIViewController, CarbonTabSwipeNavigationDelegate{
             return vc
         } else {
             let vc = storyboard.instantiateViewController(withIdentifier: "IncomeViewController") as! IncomeViewController
+            balance += expenseBudget
+            vc.balance = balance
             return vc
         }
         

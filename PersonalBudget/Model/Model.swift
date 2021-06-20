@@ -15,7 +15,7 @@ struct ExpenseModel {
 }
 
 struct IncomeModel{
-    var incomeName: String
-    var incomePrice: Int
-    var incomeDate: Int
+    var incomeName: String = ""
+    var incomePrice: Int = 0
+    var incomeDate: Int = 0
 }

@@ -32,10 +32,7 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
         super.viewDidLoad()
         
         
-        if expense.expensesPrice > 0 {
-            expenseBudget += expense.expensesPrice
-            balance -= expenseBudget
-        }
+
         expenses.append(expense)
        
         
@@ -112,8 +109,21 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
         
         var entries = [BarChartDataEntry]()
         for element in expenses{
-            entries.append(BarChartDataEntry(x: Double(Int.random(in: 0...3)), y: Double(element.expensesPrice)))
+            var x = Double()
+            if element.expensesDate < 8{
+                x = 0
+            } else if element.expensesDate >= 8 && element.expensesDate < 15{
+                x = 1
+            } else if element.expensesDate >= 15 && element.expensesDate < 22{
+                x = 2
+            } else {
+                x = 3
+            }
+            
+            
+            entries.append(BarChartDataEntry(x: x , y: Double(element.expensesPrice)))
         }
+        
         
         
         let set = BarChartDataSet(entries: entries,label: "Date")

@@ -20,19 +20,21 @@ class IncomeViewController: UIViewController, ChartViewDelegate{
     var pieChart = PieChartView()
     var barChart = BarChartView()
     
-    var dummyStruct = [IncomeModel]()
+    var balance = Int()
+    var expenseBudget = Int()
+    
+    var incomes = [IncomeModel(incomeName: "Investasi", incomePrice: 2000000, incomeDate: 10),IncomeModel(incomeName: "Gaji", incomePrice: 8000000, incomeDate: 25)]
     var dateData = ["1-7","8-14", "15-21", "22-31"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for x in 0..<3{
-            dummyStruct.append(IncomeModel(incomeName: "Investasi", incomePrice: (x*10000), incomeDate: (x+5)))
-        }
-        
         setUpPieCharts()
         setUpPromoView()
         setUpBarCharts()
+        
+        priceLabel.text = "IDR \(10000000)"
+        balanceLabel.text = "IDR \(balance)"
         
         tableView.layer.cornerRadius = 10
         tableView.layer.borderWidth = 3
@@ -69,7 +71,7 @@ class IncomeViewController: UIViewController, ChartViewDelegate{
         var entries = [PieChartDataEntry]()
      
   
-        for element in dummyStruct{
+        for element in incomes{
             entries.append(PieChartDataEntry(value: Double(element.incomePrice), label: element.incomeName))
         }
         
@@ -92,8 +94,21 @@ class IncomeViewController: UIViewController, ChartViewDelegate{
         
         
         var entries = [BarChartDataEntry]()
-        for element in dummyStruct{
-            entries.append(BarChartDataEntry(x: Double(Int.random(in: 0...3)), y: Double(element.incomePrice)))
+
+        for element in incomes{
+            var x = Double()
+            if element.incomeDate < 8{
+                x = 0
+            } else if element.incomeDate >= 8 && element.incomeDate < 15{
+                x = 1
+            } else if element.incomeDate >= 15 && element.incomeDate < 22{
+                x = 2
+            } else {
+                x = 3
+            }
+            
+
+            entries.append(BarChartDataEntry(x: x , y: Double(element.incomePrice)))
         }
         
         
@@ -128,13 +143,17 @@ class IncomeViewController: UIViewController, ChartViewDelegate{
 
 extension IncomeViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummyStruct.count
+        return incomes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "IncomeCell", for: indexPath) as! IncomeCell
-        cell.incomeName.text = dummyStruct[indexPath.row].incomeName
-        cell.incomeNominal.text = "\(dummyStruct[indexPath.row].incomePrice)"
+        cell.incomeName.text = incomes[indexPath.row].incomeName
+        cell.incomeNominal.text = "\(incomes[indexPath.row].incomePrice)"
+        let price = Double(incomes[indexPath.row].incomePrice)
+        let incomeTotalNominal = Double(balance)
+        let percentage = price/incomeTotalNominal * 100
+        cell.incomePercentage.text = "\(Int(percentage))%"
         
         return cell
     }
