@@ -21,17 +21,34 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var dateField: UITextField!
     
     let categoriesDropDown = DropDown()
-    
     var categories = ["Biaya Listrik", "Biaya Wifi", "Gaya Hidup", "Makanan", "Investasi"]
+    
+    var expenses = ExpenseModel()
+    var expensess = [ExpenseModel]()
+    var balance = Int()
+    var expenseBudget = Int()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        dateField.delegate = self
         setUpNavBar()
         setUpAccountView()
         setUpNextButton()
         setUpCategoriesDropDown()
-        // Do any additional setup after loading the view.
+        self.hideKeyboardWhenTappedAround()
+
+    }
+    
+   
+    
+  
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        dismiss(animated: true) {
+            print("dismissed")
+        }
     }
     
     
@@ -61,15 +78,47 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
             categoriesDropDown.isHidden = false
             categoriesField.endEditing(true)
         }
+        
+        if textField == dateField{
+            dateField.text = ""
+            dateField.textColor = UIColor.black
+        }
+        
     }
     
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == dateField {
+            if Int(dateField.text ?? "") ?? 31 > 30 {
+                dateField.text = "Tanggal Harus Sesuai Dengan Format"
+                dateField.textColor = UIColor.red
+                return
+            }
+            
+        }
+    }
+    
+    
+    
+    @IBAction func nextButtonTouched(_ sender: Any) {
+        expenses.expensesName = descriptionField.text ?? ""
+        expenses.expensesPrice = Int(nominalField.text ?? "") ?? 0
+        expenses.expensesDate = Int(dateField.text ?? "") ?? 0
+        let vc = self.storyboard?.instantiateViewController(identifier: "StructViewController") as! StructViewController
+        vc.expenses = expenses
+        vc.expensess = expensess
+        vc.balance = balance
+        vc.expenseBudget = expenseBudget
+        self.navigationController?.pushViewController(vc, animated: true)
+
+        
+    }
     func setUpCategoriesDropDown(){
         categoriesField.delegate = self
         categoriesDropDown.anchorView = categoriesField
         categoriesDropDown.topOffset = CGPoint(x: 0, y: -(categoriesDropDown.anchorView?.plainView.bounds.height)!)
         categoriesDropDown.dataSource = categories
         categoriesDropDown.selectionAction = { index, title in
-            
             self.categoriesField.text = title
             
         }
@@ -77,14 +126,16 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
         
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+extension TransferViewController {
+        func hideKeyboardWhenTappedAround() {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(TransferViewController.dismissKeyboard))
+            tap.cancelsTouchesInView = false
+            view.addGestureRecognizer(tap)
+        }
+        
+        @objc func dismissKeyboard() {
+            view.endEditing(true)
+        }
+    }

@@ -20,6 +20,8 @@
 		9F77218B267E29FD00E4ADB7 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F77218A267E29FD00E4ADB7 /* Model.swift */; };
 		9F772191267E472500E4ADB7 /* IncomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772190267E472500E4ADB7 /* IncomeCell.swift */; };
 		9F772194267E4DAB00E4ADB7 /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F772193267E4DAB00E4ADB7 /* TransferViewController.swift */; };
+		9F77219C267E7B4600E4ADB7 /* StructViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F77219B267E7B4600E4ADB7 /* StructViewController.swift */; };
+		9F7721A4267ED85800E4ADB7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7721A3267ED85700E4ADB7 /* MenuViewController.swift */; };
 		EAA9F28068DA0DD3FCF6C399 /* Pods_PersonalBudget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5804BFAB965E53F88BE3BF91 /* Pods_PersonalBudget.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		9F77218A267E29FD00E4ADB7 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		9F772190267E472500E4ADB7 /* IncomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeCell.swift; sourceTree = "<group>"; };
 		9F772193267E4DAB00E4ADB7 /* TransferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
+		9F77219B267E7B4600E4ADB7 /* StructViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructViewController.swift; sourceTree = "<group>"; };
+		9F7721A3267ED85700E4ADB7 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		D2DD556F41F1456370E7C4C8 /* Pods-PersonalBudget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonalBudget.release.xcconfig"; path = "Target Support Files/Pods-PersonalBudget/Pods-PersonalBudget.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +118,8 @@
 				9F77217A267DD34100E4ADB7 /* ExpensesViewController.swift */,
 				9F77217D267DD34A00E4ADB7 /* IncomeViewController.swift */,
 				9F772193267E4DAB00E4ADB7 /* TransferViewController.swift */,
+				9F77219B267E7B4600E4ADB7 /* StructViewController.swift */,
+				9F7721A3267ED85700E4ADB7 /* MenuViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -265,7 +271,9 @@
 				9F772187267E19B700E4ADB7 /* ExpensesCell.swift in Sources */,
 				9F772191267E472500E4ADB7 /* IncomeCell.swift in Sources */,
 				9F77217B267DD34100E4ADB7 /* ExpensesViewController.swift in Sources */,
+				9F7721A4267ED85800E4ADB7 /* MenuViewController.swift in Sources */,
 				9F77215F267D8DC000E4ADB7 /* AppDelegate.swift in Sources */,
+				9F77219C267E7B4600E4ADB7 /* StructViewController.swift in Sources */,
 				9F772161267D8DC000E4ADB7 /* SceneDelegate.swift in Sources */,
 				9F77218B267E29FD00E4ADB7 /* Model.swift in Sources */,
 			);

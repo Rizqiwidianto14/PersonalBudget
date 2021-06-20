@@ -20,28 +20,39 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
     
     var pieChart = PieChartView()
     var barChart = BarChartView()
+
+    var expense = ExpenseModel()
+    var balance = Int()
+    var expenseBudget = Int()
     
-    
-    var dummyStruct = [ExpenseModel]()
+    var expenses = [ExpenseModel]()
     var dateData = ["1-7","8-14", "15-21", "22-31"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-  
         
-        for x in 0..<10{
-            dummyStruct.append(ExpenseModel(expensesName: "Shopee Cards", expensesPrice: (x*10000), expensesDate: (x+5)))
+        
+        if expense.expensesPrice > 0 {
+            expenseBudget += expense.expensesPrice
+            balance -= expenseBudget
         }
+        expenses.append(expense)
+       
+        
+        balanceLabel.text = "IDR \(balance)"
+        priceLabel.text = "IDR \(expenseBudget)"
         
         setUpPieCharts()
         setUpPromoView()
         setUpBarCharts()
         
+ 
         tableView.layer.cornerRadius = 10
         tableView.layer.borderWidth = 3
         tableView.layer.borderColor = UIColor(string: "#F2F3F4").cgColor
     }
     
+  
     
     func setUpPieCharts(){
         pieChart.frame = CGRect(x: 0, y: 0, width: self.pieChartView.frame.width/2, height: self.pieChartView.frame.height-50)
@@ -66,7 +77,7 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
         var entries = [PieChartDataEntry]()
      
   
-        for element in dummyStruct{
+        for element in expenses{
             entries.append(PieChartDataEntry(value: Double(element.expensesPrice), label: element.expensesName))
         }
         
@@ -82,6 +93,9 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
     
     @IBAction func transferButtonTapped(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(identifier: "TransferViewController") as! TransferViewController
+        vc.expensess = expenses
+        vc.balance = balance
+        vc.expenseBudget = expenseBudget
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -97,7 +111,7 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
         
         
         var entries = [BarChartDataEntry]()
-        for element in dummyStruct{
+        for element in expenses{
             entries.append(BarChartDataEntry(x: Double(Int.random(in: 0...3)), y: Double(element.expensesPrice)))
         }
         
@@ -131,13 +145,26 @@ class ExpensesViewController: UIViewController, ChartViewDelegate {
 
 extension ExpensesViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummyStruct.count
+        return expenses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExpensesCell", for: indexPath) as! ExpensesCell
-        cell.expenseName.text = dummyStruct[indexPath.row].expensesName
-        cell.expensePrice.text = "\(dummyStruct[indexPath.row].expensesPrice)"
+        cell.expenseName.text = expenses[indexPath.row].expensesName
+        cell.expensePrice.text = "\(expenses[indexPath.row].expensesPrice)"
+        
+        if expenseBudget != 0 {
+            let price = Double(expenses[indexPath.row].expensesPrice)
+            let expenseBudgetNominal = Double(expenseBudget)
+            let percentage = price/expenseBudgetNominal * 100
+            cell.expensePercentage.text = "\(Int(percentage))%"
+            
+        } else {
+            cell.expensePercentage.text = "\(expenseBudget)%"
+
+        }
+        
+   
         
         return cell
     }

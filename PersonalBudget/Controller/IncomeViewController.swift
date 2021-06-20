@@ -20,14 +20,14 @@ class IncomeViewController: UIViewController, ChartViewDelegate{
     var pieChart = PieChartView()
     var barChart = BarChartView()
     
-    var dummyStruct = [ExpenseModel]()
+    var dummyStruct = [IncomeModel]()
     var dateData = ["1-7","8-14", "15-21", "22-31"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         for x in 0..<3{
-            dummyStruct.append(ExpenseModel(expensesName: "Shopee Cards", expensesPrice: (x*10000), expensesDate: (x+5)))
+            dummyStruct.append(IncomeModel(incomeName: "Investasi", incomePrice: (x*10000), incomeDate: (x+5)))
         }
         
         setUpPieCharts()
@@ -38,7 +38,6 @@ class IncomeViewController: UIViewController, ChartViewDelegate{
         tableView.layer.borderWidth = 3
         tableView.layer.borderColor = UIColor(string: "#F2F3F4").cgColor
 
-        // Do any additional setup after loading the view.
     }
     
     
@@ -71,7 +70,7 @@ class IncomeViewController: UIViewController, ChartViewDelegate{
      
   
         for element in dummyStruct{
-            entries.append(PieChartDataEntry(value: Double(element.expensesPrice), label: element.expensesName))
+            entries.append(PieChartDataEntry(value: Double(element.incomePrice), label: element.incomeName))
         }
         
         pieChart.legend.enabled = false
@@ -94,7 +93,7 @@ class IncomeViewController: UIViewController, ChartViewDelegate{
         
         var entries = [BarChartDataEntry]()
         for element in dummyStruct{
-            entries.append(BarChartDataEntry(x: Double(Int.random(in: 0...3)), y: Double(element.expensesPrice)))
+            entries.append(BarChartDataEntry(x: Double(Int.random(in: 0...3)), y: Double(element.incomePrice)))
         }
         
         
@@ -134,8 +133,8 @@ extension IncomeViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "IncomeCell", for: indexPath) as! IncomeCell
-        cell.incomeName.text = dummyStruct[indexPath.row].expensesName
-        cell.incomeNominal.text = "\(dummyStruct[indexPath.row].expensesPrice)"
+        cell.incomeName.text = dummyStruct[indexPath.row].incomeName
+        cell.incomeNominal.text = "\(dummyStruct[indexPath.row].incomePrice)"
         
         return cell
     }

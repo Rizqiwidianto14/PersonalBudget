@@ -12,18 +12,27 @@ class MainViewController: UIViewController, CarbonTabSwipeNavigationDelegate{
     
     var carbonTabSwipeNavigation = CarbonTabSwipeNavigation()
     var controllerNames = ["Pengeluaran", "Pemasukkan"]
+    var expense = ExpenseModel()
+    var expenses = [ExpenseModel]()
+    var balance = Int()
+    var expenseBudget = Int()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         setUpSegmentedView()
         setUpNavBar()
- 
+        carbonTabSwipeNavigation.reloadInputViews()
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backBarButtonItem
         
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print(expense)
+    }
+ 
+
     func setUpNavBar(){
         let logo = UIImage(named: "livinmandiri.png")
         let imageView = UIImageView(image:logo)
@@ -37,6 +46,7 @@ class MainViewController: UIViewController, CarbonTabSwipeNavigationDelegate{
     
     
     func setUpSegmentedView(){
+        
         carbonTabSwipeNavigation = CarbonTabSwipeNavigation(items: controllerNames, delegate: self)
         carbonTabSwipeNavigation.insert(intoRootViewController: self)
         carbonTabSwipeNavigation.toolbarHeight.constant = 50.0
@@ -47,15 +57,22 @@ class MainViewController: UIViewController, CarbonTabSwipeNavigationDelegate{
     }
 
     
+
     
     func carbonTabSwipeNavigation(_ carbonTabSwipeNavigation: CarbonTabSwipeNavigation, viewControllerAt index: UInt) -> UIViewController {
         guard let storyboard = storyboard else {
             return UIViewController()
         }
         if index == 0 {
-            return storyboard.instantiateViewController(withIdentifier: "ExpensesViewController")
+            let vc = storyboard.instantiateViewController(withIdentifier: "ExpensesViewController") as! ExpensesViewController
+            vc.expense = expense
+            vc.expenses = expenses
+            vc.balance = balance
+            vc.expenseBudget = expenseBudget
+            return vc
         } else {
-            return storyboard.instantiateViewController(withIdentifier: "IncomeViewController")
+            let vc = storyboard.instantiateViewController(withIdentifier: "IncomeViewController") as! IncomeViewController
+            return vc
         }
         
     }

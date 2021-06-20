@@ -9,9 +9,9 @@ import Foundation
 
 
 struct ExpenseModel {
-    var expensesName: String
-    var expensesPrice: Int
-    var expensesDate: Int
+    var expensesName: String = ""
+    var expensesPrice: Int = 0
+    var expensesDate: Int = 0
 }
 
 struct IncomeModel{
